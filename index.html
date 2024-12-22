@@ -261,18 +261,18 @@
       <input type="text" name="nome" placeholder="Seu Nome" required>
       <input type="tel" name="whatsapp" placeholder="Seu WhatsApp" required>
       <input type="email" name="email" placeholder="Seu Email" required>
-      <select name="procedimento" id="procedimento" required>
-        <option value="" disabled selected>Selecione um procedimento</option>
+      <select name="select-procedimentos" id="select-procedimentos" required>
+        <option value="disabled"  selected>Selecione um procedimento</option>
       </select>
         <div class="horario">
-            <select  name="dia" id="dia" required>
-                <option value="dia" disabled selected>Selecione um Dia</option>
+            <select  name="dia-select" id="dia-select" required>
+                <option value="dia" selected>Selecione um Dia</option>
             </select>
             <select name="hora" id="hora" required>
-                <option value="hora" disabled selected>Selecione um horário</option>
+                <option value="hora"  selected>Selecione um horário</option>
             </select>
         </div>
-      <button type="submit">Agendar</button>
+      <button id="confirmar-btn" type="submit">Agendar</button>
     </form>
   </section>
 
@@ -317,58 +317,119 @@
     nextButton.addEventListener('click', nextSlide);
     setInterval(nextSlide, 3000); // Avançar automaticamente a cada 3 segundos
 
+    document.addEventListener('DOMContentLoaded', () => {
+      carregarProcedimentos();
+    });
+
+    //Carrega procedimentos
+    function carregarProcedimentos() {
+    fetch('https://script.google.com/macros/s/AKfycby_n5pT54ZWsmSa36dL1JE2ATx8u44lNbhOKdnUbxWIyCBBROi5b0lTBD4uYDd93OMHiA/exec?procedimentos=all')
+    .then(response => response.json())
+    .then(procedimentos => {
+      const selectProcedimentos = document.getElementById('select-procedimentos');
+      selectProcedimentos.innerHTML = '<option>Selecione um procedimento</option>';
+      procedimentos.forEach(proc => {
+        const option = document.createElement('option');
+        option.value = proc;
+        option.textContent = proc;
+        selectProcedimentos.appendChild(option);
+      });
+    })
+    .catch(error => console.error('Erro ao carregar procedimentos:', error));
+  }
+
     // Agendamento - Integração com Planilha do Google
-    const sheetUrl = "https://script.google.com/macros/s/AKfycbwRyjeIwdLglT9I-BEeZgOxiI5xvN0QLzHnSzvmZvLw88_TCYl-3HOS88biFXjEDNldQQ/exec"; // Substitua pelo URL do script publicado
+  document.addEventListener("DOMContentLoaded", async () => {
+  const sheetUrl = "https://script.google.com/macros/s/AKfycbw9E96rJvw9Lkxciurfr6E_ZdSRvKWeVya62Eia0y_I1_eQ4xCKyRgvPF9q9XiUKAmdHg/exec"; // Substitua pelo URL do seu script
+  const diaSelect = document.getElementById("dia-select");
+  const horarioSelect = document.getElementById("hora");
+  const confirmarBtn = document.getElementById("confirmar-btn");
 
-    const diaSelect = document.getElementById("dia-select");
-    const horarioSelect = document.getElementById("hora");
-    const confirmarBtn = document.getElementById("confirmar-btn");
+  // Carrega os dias disponíveis ao iniciar
+  async function carregarDias() {
+    try {
+      const response = await fetch(`${sheetUrl}?dias=all`); // Ajuste o endpoint para retornar todos os dias
+      const dias = await response.json();
+      
+      diaSelect.innerHTML = '<option value="" disabled selected>Selecione um dia</option>';
+      dias.forEach(dia => {
+        const option = document.createElement("option");
+        option.value = dia;
+        option.textContent = dia;
+        diaSelect.appendChild(option);
+      });
+    } catch (error) {
+      console.error("Erro ao carregar dias:", error);
+      alert("Erro ao carregar dias disponíveis.");
+    }
+  }
 
-    // Atualiza os horários ao selecionar um dia
-    diaSelect.addEventListener("change", async () => {
-      const dia = diaSelect.value;
-      try {
-        const response = await fetch(`${sheetUrl}?dia=${dia}`);
-        const horarios = await response.json();
-        
-        horarioSelect.innerHTML = '<option value="" disabled selected>Selecione um horário</option>';
+  // Atualiza os horários ao clicar no select de horários
+  horarioSelect.addEventListener("focus", async () => {
+    const dia = diaSelect.value;
+    if (!dia) {
+      alert("Por favor, selecione um dia antes de escolher o horário.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${sheetUrl}?dia=${dia}`);
+      const horarios = await response.json();
+
+      horarioSelect.innerHTML = '<option value="" disabled selected>Selecione um horário</option>';
+      if (horarios.length === 0) {
+        const option = document.createElement("option");
+        option.textContent = "Nenhum horário disponível";
+        option.disabled = true;
+        horarioSelect.appendChild(option);
+      } else {
         horarios.forEach(horario => {
           const option = document.createElement("option");
           option.value = horario;
           option.textContent = horario;
           horarioSelect.appendChild(option);
         });
-      } catch (error) {
-        console.error("Erro ao buscar horários:", error);
       }
-    });
+    } catch (error) {
+      console.error("Erro ao buscar horários:", error);
+      alert("Erro ao carregar horários.");
+    }
+  });
 
-    // Remove o horário escolhido
-    confirmarBtn.addEventListener("click", async () => {
-      const dia = diaSelect.value;
-      const horario = horarioSelect.value;
+  // Remove o horário escolhido
+  confirmarBtn.addEventListener("click", async (event) => {
+    event.preventDefault(); // Evita o envio padrão do formulário
 
-      if (!dia || !horario) {
-        alert("Por favor, selecione o dia e o horário.");
-        return;
-      }
+    const dia = diaSelect.value;
+    const horario = horarioSelect.value;
 
-      try {
-        const response = await fetch(sheetUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({ dia, horario })
-        });
+    if (!dia || !horario) {
+      alert("Por favor, selecione o dia e o horário.");
+      return;
+    }
 
-        const result = await response.text();
-        alert(result);
+    try {
+      const response = await fetch(sheetUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ dia, horario })
+      });
 
-        // Atualiza a lista de horários
-        diaSelect.dispatchEvent(new Event("change"));
-      } catch (error) {
-        console.error("Erro ao confirmar horário:", error);
-      }
-    });
+      const result = await response.text();
+      alert(result);
+
+      // Atualiza a lista de horários
+      horarioSelect.innerHTML = '<option value="" disabled selected>Selecione um horário</option>';
+    } catch (error) {
+      console.error("Erro ao confirmar horário:", error);
+      alert("Erro ao confirmar horário.");
+    }
+  });
+
+  // Inicializar
+  await carregarProcedimentos();
+  await carregarDias();
+});
   </script>
 </body>
 </html>
