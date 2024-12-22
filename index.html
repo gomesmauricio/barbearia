@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,25 +50,25 @@
 
     /* Header atualizado */
     header {
-        background-color: #95a3a329;
-        color: #0e0d0d;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 20px;
-        gap: 20px;
+      background-color: #95a3a329;
+      color: #0e0d0d;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 20px;
+      gap: 20px;
     }
 
     header img {
-        max-height: 50px;
-        width: auto;
-        border-radius: 5px;
+      max-height: 50px;
+      width: auto;
+      border-radius: 5px;
     }
 
     header h1 {
-        margin: 0;
-        font-size: 2.5rem;
-        text-align: center;
+      margin: 0;
+      font-size: 2.5rem;
+      text-align: center;
     }
 
     /* Carousel */
@@ -105,18 +106,18 @@
 
     /* Botões do Carrossel */
     .carousel .controls button {
-        background-color: #d6ccca;
-        border: none;
-        color: white;
-        font-size: 1.2rem;
-        cursor: pointer;
-        padding: 5px 5px;
-        border-radius: 5px;
-        transition: background-color 0.3s;
+      background-color: #d6ccca;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 5px 5px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
     }
 
     .carousel .controls button:hover {
-        background-color: #afabaa;
+      background-color: #afabaa;
     }
 
     /* Sections */
@@ -124,7 +125,8 @@
       padding: 40px 20px;
     }
 
-    #quem-somos, #agendar {
+    #quem-somos,
+    #agendar {
       background-color: #fff;
       text-align: center;
       margin: 20px auto;
@@ -134,7 +136,8 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    #quem-somos h2, #agendar h2 {
+    #quem-somos h2,
+    #agendar h2 {
       font-size: 1.8rem;
       margin-bottom: 20px;
     }
@@ -148,7 +151,8 @@
       margin: 0 auto;
     }
 
-    input, button {
+    input,
+    button {
       padding: 10px;
       font-size: 1rem;
     }
@@ -168,66 +172,67 @@
 
     /* Estilo para os botões seletores do formulário */
     select {
-        padding: 10px;
-        font-size: 1rem;
-     /*   border: 1px solid #ccc; */
-        border-radius: 5px;
-        background-color: white;
-        color: #333;
-        transition: border-color 0.3s;
+      padding: 10px;
+      font-size: 1rem;
+      /*   border: 1px solid #ccc; */
+      border-radius: 5px;
+      background-color: white;
+      color: #333;
+      transition: border-color 0.3s;
     }
 
     .horario {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 5px 8px        
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 5px 8px
     }
 
-    
+
 
     select:focus {
-        border-color: #ff5733;
-        outline: none;
+      border-color: #ff5733;
+      outline: none;
     }
 
-     select {
-        width: 100%; /* Para manter alinhado com os campos de texto */
+    select {
+      width: 100%;
+      /* Para manter alinhado com os campos de texto */
     }
 
     /* Estilo do Rodapé */
     footer {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 20px 0;
-        margin-top: 20px;
-        font-size: 0.9rem;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 20px;
+      font-size: 0.9rem;
     }
 
     footer .social-media {
-        margin-top: 10px;
-        display: flex;
-        justify-content: center;
-    gap: 20px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
     }
 
     footer .social-media a img {
-        width: 30px;
-        height: 30px;
-        transition: transform 0.3s;
+      width: 30px;
+      height: 30px;
+      transition: transform 0.3s;
     }
 
     footer .social-media a img:hover {
-        transform: scale(1.1);
+      transform: scale(1.1);
     }
-
   </style>
 </head>
+
 <body>
-    <header>
-        <img src="img/logo.png" alt="Logo da Barbearia">
-        <h1>Klebson Artes</h1>
-      </header>      
+  <header>
+    <img src="img/logo.png" alt="Logo da Barbearia">
+    <h1>Klebson Artes</h1>
+  </header>
 
   <nav class="navbar">
     <div class="menu">
@@ -252,7 +257,8 @@
 
   <section id="quem-somos">
     <h2>Quem Somos</h2>
-    <p> Nos dedicamos a oferecer cortes de cabelo modernos, cuidados com a barba e um ambiente acolhedor para nossos clientes. Experimente nossos serviços e transforme seu visual!</p>
+    <p> Nos dedicamos a oferecer cortes de cabelo modernos, cuidados com a barba e um ambiente acolhedor para nossos
+      clientes. Experimente nossos serviços e transforme seu visual!</p>
   </section>
 
   <section id="agendar">
@@ -262,16 +268,16 @@
       <input type="tel" name="whatzapp" id="whatzapp" placeholder="Seu WhatzApp" required>
       <input type="email" name="email" id="email" placeholder="Seu Email" required>
       <select name="select-procedimentos" id="select-procedimentos" required>
-        <option value="disabled"  selected>Selecione um procedimento</option>
+        <option value="disabled" selected>Selecione um procedimento</option>
       </select>
-        <div class="horario">
-            <select  name="dia-select" id="dia-select" required>
-                <option value="dia" selected>Selecione um Dia</option>
-            </select>
-            <select name="hora" id="hora" required>
-                <option value="hora"  selected>Selecione um horário</option>
-            </select>
-        </div>
+      <div class="horario">
+        <select name="dia-select" id="dia-select" required>
+          <option value="dia" selected>Selecione um Dia</option>
+        </select>
+        <select name="hora" id="hora" required>
+          <option value="hora" selected>Selecione um horário</option>
+        </select>
+      </div>
       <button id="confirmar-btn" type="submit">Agendar</button>
     </form>
   </section>
@@ -291,210 +297,7 @@
     </div>
   </footer>
 
-  <script>
-    // Carrossel
-    const track = document.getElementById('carousel-track');
-    const images = track.children;
-    const prevButton = document.getElementById('prev');
-    const nextButton = document.getElementById('next');
-    let index = 0;
-
-    function updateCarousel() {
-      track.style.transform = `translateX(-${index * 100}%)`;
-    }
-
-    function nextSlide() {
-      index = (index + 1) % images.length;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      index = (index - 1 + images.length) % images.length;
-      updateCarousel();
-    }
-
-    prevButton.addEventListener('click', prevSlide);
-    nextButton.addEventListener('click', nextSlide);
-    setInterval(nextSlide, 3000); // Avançar automaticamente a cada 3 segundos
-
-    document.addEventListener('DOMContentLoaded', () => {
-      carregarProcedimentos();
-    });
-
-    //Carrega procedimentos
-    function carregarProcedimentos() {
-    fetch('https://script.google.com/macros/s/AKfycby_n5pT54ZWsmSa36dL1JE2ATx8u44lNbhOKdnUbxWIyCBBROi5b0lTBD4uYDd93OMHiA/exec?procedimentos=all')
-    .then(response => response.json())
-    .then(procedimentos => {
-      const selectProcedimentos = document.getElementById('select-procedimentos');
-      selectProcedimentos.innerHTML = '<option>Selecione um procedimento</option>';
-      procedimentos.forEach(proc => {
-        const option = document.createElement('option');
-        option.value = proc;
-        option.textContent = proc;
-        selectProcedimentos.appendChild(option);
-      });
-    })
-    .catch(error => console.error('Erro ao carregar procedimentos:', error));
-  }
-
-    // Agendamento - Integração com Planilha do Google
-  document.addEventListener("DOMContentLoaded", async () => {
-  const sheetUrl = "https://script.google.com/macros/s/AKfycbw9E96rJvw9Lkxciurfr6E_ZdSRvKWeVya62Eia0y_I1_eQ4xCKyRgvPF9q9XiUKAmdHg/exec"; // Substitua pelo URL do seu script
-  const diaSelect = document.getElementById("dia-select");
-  const horarioSelect = document.getElementById("hora");
-  const confirmarBtn = document.getElementById("confirmar-btn");
-
-  // Carrega os dias disponíveis ao iniciar
-  async function carregarDias() {
-    try {
-      const response = await fetch(`${sheetUrl}?dias=all`); // Ajuste o endpoint para retornar todos os dias
-      const dias = await response.json();
-      
-      diaSelect.innerHTML = '<option value="" disabled selected>Selecione um dia</option>';
-      dias.forEach(dia => {
-        const option = document.createElement("option");
-        option.value = dia;
-        option.textContent = dia;
-        diaSelect.appendChild(option);
-      });
-    } catch (error) {
-      console.error("Erro ao carregar dias:", error);
-      alert("Erro ao carregar dias disponíveis.");
-    }
-  }
-
-  // Atualiza os horários ao clicar no select de horários
-  horarioSelect.addEventListener("focus", async () => {
-    const dia = diaSelect.value;
-    if (!dia) {
-      alert("Por favor, selecione um dia antes de escolher o horário.");
-      return;
-    }
-
-    try {
-      const response = await fetch(`${sheetUrl}?dia=${dia}`);
-      const horarios = await response.json();
-
-      horarioSelect.innerHTML = '<option value="" disabled selected>Selecione um horário</option>';
-      if (horarios.length === 0) {
-        const option = document.createElement("option");
-        option.textContent = "Nenhum horário disponível";
-        option.disabled = true;
-        horarioSelect.appendChild(option);
-      } else {
-        horarios.forEach(horario => {
-          const option = document.createElement("option");
-          option.value = horario;
-          option.textContent = horario;
-          horarioSelect.appendChild(option);
-        });
-      }
-    } catch (error) {
-      console.error("Erro ao buscar horários:", error);
-      alert("Erro ao carregar horários.");
-    }
-  });
-
-  //Salva agendamento
-  async function agendarHorario(nome, procedimento, dia, hora, email, whatzapp) {
-  const url = "https://script.google.com/macros/s/AKfycbwKddoGf1JgJSGz8N4VZ7cbgC_X30qcyK-dMnpoho8DtCvv1Ia7cNBqGzTgzLb7jbRiMQ/exec"; // Substitua "SEU_SCRIPT_URL" pela URL do seu script publicado
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: new URLSearchParams({
-        nome: nome,
-        procedimento: procedimento,
-        dia: dia,
-        hora: hora,
-        email: email,
-        whatzapp: whatzapp
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error("Erro na requisição: " + response.status);
-    }
-
-    const result = await response.text();
-    alert(result); // Exibe a resposta no navegador
-    document.getElementById("agendamento-form").reset();
-  } catch (error) {
-    console.error("Erro ao salvar agendamento:", error);
-    alert("Erro ao salvar agendamento. Verifique os dados e tente novamente.");
-  }
-}
-
-  document.getElementById("agendamento-form").addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  const nome = document.getElementById("nome").value;
-  const procedimento = document.getElementById("select-procedimentos").value;
-  const dia = document.getElementById("dia-select").value;
-  const hora = document.getElementById("hora").value;
-  const email = document.getElementById("email").value;
-  const whatzapp = document.getElementById("whatzapp").value;
-
-  if (!nome || !procedimento || !dia || !hora || !email || !whatzapp) {
-    alert("Por favor, preencha todos os campos.");
-    return;
-  }
-
-  agendarHorario(nome, procedimento, dia, hora, email, whatzapp);
-  });
-
-
-  // Remove o horário escolhido
-  async function removerHorario(dia, hora) {
-  const url = "https://script.google.com/macros/s/AKfycby-bDsetcqx9dVLWOkxeMX-fnsgDhKf0N6wIQ2m8aPMod2sSOqQiDFs5MlkYsu4LQMExg/exec"; // Substitua "SEU_SCRIPT_URL" pela URL do seu script publicado
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: new URLSearchParams({
-        dia: dia,
-        hora: hora
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error("Erro na requisição: " + response.status);
-    }
-
-    const result = await response.text();
-    alert(result); // Exibe a resposta no navegador
-  } catch (error) {
-    console.error("Erro ao remover horário:", error);
-    alert("Erro ao remover horário. Verifique os dados e tente novamente.");
-  }
-}
-
-// Função para capturar os dados do formulário e chamar a função acima
-  document.getElementById("agendamento-form").addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  const dia = document.getElementById("dia-select").value;
-  const hora = document.getElementById("hora").value;
-
-  if (!dia || !hora) {
-    alert("Por favor, preencha todos os campos.");
-    return;
-  }
-
-  removerHorario(dia, hora);
-});
-
-  // Inicializar
-  await carregarProcedimentos();
-  await carregarDias();
-});
-  </script>
+  <script src="script.js"></script>
 </body>
+
 </html>
