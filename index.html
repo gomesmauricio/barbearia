@@ -258,9 +258,9 @@
   <section id="agendar">
     <h2>Agende um Horário</h2>
     <form id="agendamento-form">
-      <input type="text" name="nome" placeholder="Seu Nome" required>
-      <input type="tel" name="whatsapp" placeholder="Seu WhatsApp" required>
-      <input type="email" name="email" placeholder="Seu Email" required>
+      <input type="text" name="nome" id="nome" placeholder="Seu Nome" required>
+      <input type="tel" name="whatzapp" id="whatzapp" placeholder="Seu WhatzApp" required>
+      <input type="email" name="email" id="email" placeholder="Seu Email" required>
       <select name="select-procedimentos" id="select-procedimentos" required>
         <option value="disabled"  selected>Selecione um procedimento</option>
       </select>
@@ -286,7 +286,7 @@
         <img src="img/facebook.png" alt="Facebook">
       </a>
       <a href="https://wa.me/(81)9 8300-3182" target="_blank">
-        <img src="img/whatzap.png" alt="WhatsApp">
+        <img src="img/whatzap.png" alt="WhatzApp">
       </a>
     </div>
   </footer>
@@ -396,35 +396,100 @@
     }
   });
 
-  // Remove o horário escolhido
-  confirmarBtn.addEventListener("click", async (event) => {
-    event.preventDefault(); // Evita o envio padrão do formulário
+  //Salva agendamento
+  async function agendarHorario(nome, procedimento, dia, hora, email, whatzapp) {
+  const url = "https://script.google.com/macros/s/AKfycbwKddoGf1JgJSGz8N4VZ7cbgC_X30qcyK-dMnpoho8DtCvv1Ia7cNBqGzTgzLb7jbRiMQ/exec"; // Substitua "SEU_SCRIPT_URL" pela URL do seu script publicado
 
-    const dia = diaSelect.value;
-    const horario = horarioSelect.value;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams({
+        nome: nome,
+        procedimento: procedimento,
+        dia: dia,
+        hora: hora,
+        email: email,
+        whatzapp: whatzapp
+      })
+    });
 
-    if (!dia || !horario) {
-      alert("Por favor, selecione o dia e o horário.");
-      return;
+    if (!response.ok) {
+      throw new Error("Erro na requisição: " + response.status);
     }
 
-    try {
-      const response = await fetch(sheetUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ dia, horario })
-      });
+    const result = await response.text();
+    alert(result); // Exibe a resposta no navegador
+    document.getElementById("agendamento-form").reset();
+  } catch (error) {
+    console.error("Erro ao salvar agendamento:", error);
+    alert("Erro ao salvar agendamento. Verifique os dados e tente novamente.");
+  }
+}
 
-      const result = await response.text();
-      alert(result);
+  document.getElementById("agendamento-form").addEventListener("submit", function(event) {
+  event.preventDefault();
 
-      // Atualiza a lista de horários
-      horarioSelect.innerHTML = '<option value="" disabled selected>Selecione um horário</option>';
-    } catch (error) {
-      console.error("Erro ao confirmar horário:", error);
-      alert("Erro ao confirmar horário.");
-    }
+  const nome = document.getElementById("nome").value;
+  const procedimento = document.getElementById("select-procedimentos").value;
+  const dia = document.getElementById("dia-select").value;
+  const hora = document.getElementById("hora").value;
+  const email = document.getElementById("email").value;
+  const whatzapp = document.getElementById("whatzapp").value;
+
+  if (!nome || !procedimento || !dia || !hora || !email || !whatzapp) {
+    alert("Por favor, preencha todos os campos.");
+    return;
+  }
+
+  agendarHorario(nome, procedimento, dia, hora, email, whatzapp);
   });
+
+
+  // Remove o horário escolhido
+  async function removerHorario(dia, hora) {
+  const url = "https://script.google.com/macros/s/AKfycby-bDsetcqx9dVLWOkxeMX-fnsgDhKf0N6wIQ2m8aPMod2sSOqQiDFs5MlkYsu4LQMExg/exec"; // Substitua "SEU_SCRIPT_URL" pela URL do seu script publicado
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams({
+        dia: dia,
+        hora: hora
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro na requisição: " + response.status);
+    }
+
+    const result = await response.text();
+    alert(result); // Exibe a resposta no navegador
+  } catch (error) {
+    console.error("Erro ao remover horário:", error);
+    alert("Erro ao remover horário. Verifique os dados e tente novamente.");
+  }
+}
+
+// Função para capturar os dados do formulário e chamar a função acima
+  document.getElementById("agendamento-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const dia = document.getElementById("dia-select").value;
+  const hora = document.getElementById("hora").value;
+
+  if (!dia || !hora) {
+    alert("Por favor, preencha todos os campos.");
+    return;
+  }
+
+  removerHorario(dia, hora);
+});
 
   // Inicializar
   await carregarProcedimentos();
